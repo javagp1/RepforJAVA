@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.fx.jlx.springMVC.springMVC.mapper.GoodsinfoMapperEx">
-  <select id="selectAllInfoes" resultType="map">
-  	
-  SELECT gd.gdid,gd.gdname,img.gimgurl FROM goodsinfo gd JOIN goodsimage img ON gd.gdid=img.gdid WHERE img.gimgtype=1
-
-  </select>
-</mapper>
