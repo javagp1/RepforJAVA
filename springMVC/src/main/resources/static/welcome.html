@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>welcome.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" type="text/css" href="/springMVC/dist/css/bootstrap.min.css">
+	<style type="text/css">
+		.container{
+		background-color: pink;
+		height: 650px;
+		width: 1250px;
+		padding: 0px;
+		margin: 0px;
+		}
+		.left-box{
+		background-color: blue;
+		height: 100%;
+		width: 15%;
+		float: left;
+		padding:20px;
+		text-align: center;
+		}
+		.left-box .label{
+	
+			padding:10px;
+	
+			margin-top:20px;
+		}
+		.right-box{
+			height: 100%;
+			width: 85%;
+			float: left;
+		}
+		.right-box iframe{
+			height: 100%;
+			width: 100%;
+			border: 0px
+		}
+		.label{
+			display: block;
+			margin-bottom: 30px 
+		}
+	</style>
+  </head>
+  
+  <body>
+    <div class="container">
+    <div class="left-box">
+    <a class="label label-danger" href="/springMVC/areainfoctrl/getall?pagenum=1" target="main"><i class="glyphicon glyphicon-globe">地区信息管理</i></a>
+   
+    <a class="label label-success" href="/springMVC/goodsinfoctrl/getall?pagenum=1" target="main"><i class="glyphicon glyphicon-paperclip">商品信息管理</i></a>
+    
+   
+    <a class="label label-primary" href="/springMVC/storeinfoctrl/getall?pagenum=1" target="main"><i class="glyphicon glyphicon-link">店铺信息管理</i></a>
+    </div>
+    <div class="right-box">
+    	<iframe name="main"></iframe>
+    </div>	
+    </div>
+    
+    
+  </body>
+</html>

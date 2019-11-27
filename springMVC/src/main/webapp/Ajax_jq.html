@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ajax_jq.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="/springMVC/dist/css/bootstrap.min.css">
+<script type="text/javascript" src="/springMVC/sysjq/jquery.min.js"></script>
+</head>
+
+<body>
+
+	
+	<div class="container text-center">
+		
+			<table class="table table-hover table-striped">
+			<thead>
+	 					<tr>
+	 						<td>编号</td>
+	 						<td>名称</td>
+	 						<td>行政级别</td>
+	 						<td>上级地区名称</td>
+	 						<td>数据维护</td>
+	 						
+	 					</tr>
+	 				
+	 				</thead>
+	 				<tbody>
+	 					
+	 				
+	 				</tbody>
+			</table>
+		</div>
+		<div class="text-center" id="page">
+ 					<button  class="btn btn-link" pn="1" >首页</button>
+ 					
+ 					
+ 					<span id="pagenums"></span>
+ 					
+ 					
+ 					<button  class="btn btn-link" pn="0" nt="nt">尾页</button>
+ 					
+ 				</div>
+	
+	
+</body>
+<script type="text/javascript">
+	$("").ready(function(){
+	
+	
+	getAreaInfos(1);
+	
+	$(document).delegate("[pn]","click",function(){
+  			getAreaInfos($(this).attr("pn"));
+  		
+  		})
+	
+	
+	
+	
+	
+
+	 function getAreaInfos(pagenum){
+	 
+	 
+	
+		
+		var param = {pageNum:pagenum};
+		
+		$.ajax("http://192.168.1.185:8086/springMVC/ajaxctrl/ajaxgo",{
+		
+		data:param,
+		dataType:"json",
+		type:"get",
+		xhrFields: {
+						"withCredentials": true
+					},
+		success:function(result){
+		
+		$("[pn]:last").attr("pn",result.pagecount);
+		
+		var prev=(result.currentpagenum-1);
+		
+		if(prev>0){
+		 var bt1 = "<button  class='btn btn-link' pn='0' btn='prev' >上一页</button>";
+		 $("[btn=prev]").remove();
+		$("#pagenums").before(bt1);
+		$("[btn=prev]").attr("pn",prev);
+		}else{
+		 $("[btn=prev]").remove();
+		}
+		
+		
+		var next=(result.currentpagenum+1);
+		if(result.currentpagenum<result.pagecount){
+		var bt2 = "<button  class='btn btn-link' pn='0' btn='next' >下一页</button>";
+		$("[btn=next]").remove();
+		$("[nt=nt]").before(bt2);
+		$("[btn=next]").attr("pn",next);
+		}else{
+		$("[btn=next]").remove();
+		}
+		$("#pagenums button").remove();
+		
+		for(var i=1;i<=result.pagecount;i++){
+  					
+  					if(i==result.currentpagenum){
+  						$("#pagenums").append("<button class='btn btn-primary disabled' >"+i+"</button>");
+  					}
+  					else{
+  						$("#pagenums").append("<button  class='btn btn-link' pn='"+i+"' >"+i+"</button>");
+  					}
+  					
+  				/* 	$("#pagenums button:last").click(function(){
+  						
+  						getAreaInfos($(this).attr("pn"));
+  						
+  					});
+  					 */
+  					
+  				
+  				}
+  				
+  			$(".table tbody tr").remove();
+			var dt = "";
+			for(i in result.infoes){
+				var area = result.infoes[i];
+				dt+="<tr>";
+				dt+="<td>"+area.aid+"</td>";
+				dt+="<td>"+area.aname+"</td>";
+				dt+="<td>"+area.alevel+"</td>";
+				dt+="<td>"+(area.aparentid==null?"":area.aparentid)+"</td>";
+				dt+="<td><button class='btn btn-danger'>delete</button><td>";
+				dt+="</tr>"; 
+				
+			}
+			$(".table").append(dt);
+			
+	}
+		})
+		
+		
+	
+	
+	}
+	})
+</script>
+</html>
