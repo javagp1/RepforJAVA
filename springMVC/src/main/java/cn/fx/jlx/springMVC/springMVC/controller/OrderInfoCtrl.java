@@ -20,6 +20,9 @@ public class OrderInfoCtrl {
 	@Autowired
 	private OrderInfoService orderInfoService;
 	
+	
+	
+	
 	@RequestMapping("creatorder")
 	public Object creatOrder(Orderinfo orderinfo,@RequestParam(value="ctid") List<Integer> ctid,HttpSession session){
 		

@@ -2,6 +2,7 @@ package cn.fx.jlx.springMVC.springMVC.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
@@ -13,6 +14,7 @@ import cn.fx.jlx.springMVC.springMVC.mapper.CartMapper;
 import cn.fx.jlx.springMVC.springMVC.mapper.OrderinfoMapper;
 import cn.fx.jlx.springMVC.springMVC.mapper.OrderinfoMapperEx;
 import cn.fx.jlx.springMVC.springMVC.mapper.OrderlistMapper;
+import cn.fx.jlx.springMVC.springMVC.mapper.OrderlistMapperEx;
 import cn.fx.jlx.springMVC.springMVC.pojo.CartExample;
 import cn.fx.jlx.springMVC.springMVC.pojo.Orderinfo;
 import cn.fx.jlx.springMVC.springMVC.pojo.OrderinfoExample;
@@ -32,44 +34,25 @@ public class OrderInfoService {
 	OrderlistMapper orderlistMapper;
 	
 	@Autowired
+	OrderlistMapperEx orderlistMapperEx;
+	
+	@Autowired
 	CartMapper cartMapper;
 	
+	
+	
 	/**
-	 * 根据编号 更新订单信息状态 为  “已付款” ，并删除购物车中对应的商品信息项
-	 * @param orderInfoID 指定的订单编号
-	 */
-	@Transactional
-	public void paiedDone(String orderInfoID){
-		Orderinfo order=orderinfoMapper.selectByPrimaryKey(orderInfoID);	
-		order.setOfstate(2);
-		orderinfoMapper.updateByPrimaryKeySelective(order);		
-		OrderlistExample example=new OrderlistExample();
-		example.createCriteria().andOfidEqualTo(orderInfoID);
-		List<Orderlist> ol_list= orderlistMapper.selectByExample(example);				
-		for (Orderlist ol : ol_list) {
-			CartExample cart_example=new CartExample();
-			cart_example.createCriteria().andUseridEqualTo(order.getUserid()).andGdidEqualTo(ol.getGdid()).andGsidEqualTo(ol.getGsid());
-			cartMapper.deleteByExample(cart_example);					
-		}					
-	}
-	
-	
-/*	
-	*//**
-	 * 获取所有商家订单
-	 * @param stuserid
+	 * 获取商家登录的订单
+	 * @param stid
 	 * @return
-	 *//*
-	
-	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){
-		
+	 */
+	public List<Orderlist> getOrderInformationsByStuserID(Integer stid){	
 		OrderlistExample example=new OrderlistExample();
-		example.createCriteria().andGdidEqualTo(stuserid);
+		example.createCriteria().andGdidEqualTo(stid);
 		return orderlistMapper.selectByExample(example);
 	}
-	*/
 	
-	
+
 	
 	@Transactional
 	public void payComplate(String ofid){
