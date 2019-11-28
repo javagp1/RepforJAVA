@@ -46,9 +46,9 @@ public class OrderInfoService {
 	 * @param stid
 	 * @return
 	 */
-	public List<Orderlist> getOrderInformationsByStuserID(Integer stid){	
+	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){	
 		OrderlistExample example=new OrderlistExample();
-		example.createCriteria().andGdidEqualTo(stid);
+		example.createCriteria().andGdidEqualTo(stuserid);
 		return orderlistMapper.selectByExample(example);
 	}
 	
