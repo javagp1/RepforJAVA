@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.fx.jlx.springMVC.springMVC.mapper.GoodscollectionMapper;
 import cn.fx.jlx.springMVC.springMVC.mapper.GoodscollectionMapperEx;
+import cn.fx.jlx.springMVC.springMVC.pojo.GoodscollectionExample;
 import cn.fx.jlx.springMVC.springMVC.pojo.GoodscollectionKey;
 
 @Service
@@ -29,9 +30,16 @@ public class GoodsCollectionService {
 		return goodscollectionMapper.deleteByPrimaryKey(goodscollectionKey)==1;
 	}
 	
-	@Transactional
+	
 	public List<Map> selectCollection(Integer userid){
 	 return	goodscollectionmapperex.getCollections(userid);
+	}
+	
+	public Long countCollection(Integer gdid){
+		
+		GoodscollectionExample example = new GoodscollectionExample();
+		example.createCriteria().andGdidEqualTo(gdid);
+		return goodscollectionMapper.countByExample(example);
 	}
 	
 }
