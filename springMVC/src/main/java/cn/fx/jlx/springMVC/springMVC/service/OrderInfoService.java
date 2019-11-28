@@ -33,6 +33,44 @@ public class OrderInfoService {
 	
 	@Autowired
 	CartMapper cartMapper;
+	
+	/**
+	 * 根据编号 更新订单信息状态 为  “已付款” ，并删除购物车中对应的商品信息项
+	 * @param orderInfoID 指定的订单编号
+	 */
+	@Transactional
+	public void paiedDone(String orderInfoID){
+		Orderinfo order=orderinfoMapper.selectByPrimaryKey(orderInfoID);	
+		order.setOfstate(2);
+		orderinfoMapper.updateByPrimaryKeySelective(order);		
+		OrderlistExample example=new OrderlistExample();
+		example.createCriteria().andOfidEqualTo(orderInfoID);
+		List<Orderlist> ol_list= orderlistMapper.selectByExample(example);				
+		for (Orderlist ol : ol_list) {
+			CartExample cart_example=new CartExample();
+			cart_example.createCriteria().andUseridEqualTo(order.getUserid()).andGdidEqualTo(ol.getGdid()).andGsidEqualTo(ol.getGsid());
+			cartMapper.deleteByExample(cart_example);					
+		}					
+	}
+	
+	
+	
+	/**
+	 * 获取所有商家订单
+	 * @param stuserid
+	 * @return
+	 */
+	
+	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){
+		
+		OrderlistExample example=new OrderlistExample();
+		example.createCriteria().andGdidEqualTo(stuserid);
+		return orderlistMapper.selectByExample(example);
+	}
+	
+	
+	
+	
 	@Transactional
 	public void payComplate(String ofid){
 		
@@ -73,10 +111,6 @@ public class OrderInfoService {
 	orderinfoMapper.insert(orderinfo);
 	OrderlistExample example = new OrderlistExample();
 	example.createCriteria().andOfidEqualTo(ofid);
-	
-	
-		
-	
 	
 	List<Orderlist> list = orderinfoMapperEx.creatInfolist(ctid);
 	for (int i = 0; i < list.size(); i++) {

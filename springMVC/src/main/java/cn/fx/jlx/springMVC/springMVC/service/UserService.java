@@ -10,10 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.fx.jlx.springMVC.springMVC.exception.LognameNotExistException;
 import cn.fx.jlx.springMVC.springMVC.exception.PasswordErroException;
+import cn.fx.jlx.springMVC.springMVC.exception.SLognameNotExistException;
+import cn.fx.jlx.springMVC.springMVC.exception.SPasswordErroException;
+import cn.fx.jlx.springMVC.springMVC.exception.SStatusException;
 import cn.fx.jlx.springMVC.springMVC.exception.StatusException;
 import cn.fx.jlx.springMVC.springMVC.mapper.StuserMapper;
 import cn.fx.jlx.springMVC.springMVC.mapper.UserMapper;
 import cn.fx.jlx.springMVC.springMVC.pojo.Stuser;
+import cn.fx.jlx.springMVC.springMVC.pojo.StuserExample;
 import cn.fx.jlx.springMVC.springMVC.pojo.User;
 import cn.fx.jlx.springMVC.springMVC.pojo.UserExample;
 
@@ -25,6 +29,8 @@ public class UserService {
 	
 	@Autowired
 	private StuserMapper stuserMapper;
+	
+
 	
 	@Transactional
 	public boolean stregister(Stuser stuser) {
@@ -68,8 +74,6 @@ public class UserService {
 		List<User> li = userMapper.selectByExample(example);
 		
 
-		
-
 		if (li.size() == 0) {
 			throw new LognameNotExistException();
 		} else {
@@ -87,4 +91,44 @@ public class UserService {
 		}
 
 	}
+	
+	
+	
+	/**
+	 * 商家登录
+	 * @param slogname
+	 * @param spassword
+	 * @return
+	 * @throws SLognameNotExistException
+	 * @throws SPasswordErroException
+	 * @throws SStatusException
+	 */
+	public Stuser slogin(String slogname, String spassword)
+		throws SLognameNotExistException, SPasswordErroException, SStatusException {
+		
+		StuserExample example=new StuserExample();
+		example.createCriteria().andSlognameEqualTo(slogname);
+		List<Stuser> stli=stuserMapper.selectByExample(example);
+		
+		if(stli.size()==0){
+			throw new SLognameNotExistException();	
+		}else {
+			Stuser stuser=stli.get(0);
+			String spasswordMd5 = new Md5Hash(spassword, stuser.getSalt()).toString();
+			if (!spasswordMd5.equals(stuser.getSpassword())) {
+				throw new SPasswordErroException();
+			}else if (stuser.getStatus() == 0) {
+				throw new SStatusException();
+			}  else {
+				return stuser;
+			}
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
 }
