@@ -54,12 +54,12 @@ public class OrderInfoService {
 	}
 	
 	
-	
-	/**
+/*	
+	*//**
 	 * 获取所有商家订单
 	 * @param stuserid
 	 * @return
-	 */
+	 *//*
 	
 	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){
 		
@@ -67,7 +67,7 @@ public class OrderInfoService {
 		example.createCriteria().andGdidEqualTo(stuserid);
 		return orderlistMapper.selectByExample(example);
 	}
-	
+	*/
 	
 	
 	
