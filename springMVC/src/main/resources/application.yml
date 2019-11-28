@@ -11,7 +11,10 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/mgj
     username: root
+
     password: 111111
+
+ 
     driver-class-name: com.mysql.jdbc.Driver
     
     type: com.alibaba.druid.pool.DruidDataSource
@@ -31,6 +34,7 @@ spring:
 
 
   resources:
+
     static-locations: classpath:/public,classpath:/static,file:d:/sysfiles190806
 
 server:
