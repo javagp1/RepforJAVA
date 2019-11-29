@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fx.jlx.springMVC.springMVC.mapper.GoodscollectionMapperEx">
+  <select id="getCollections" resultType="map">
+  	
+  	SELECT goods.gdid,goods.gdname,gimage.gimgurl,gprice.price FROM goodscollection gcollection
+JOIN goodsinfo goods ON gcollection.gdid=goods.gdid
+ JOIN goodsimage gimage ON goods.gdid=gimage.gdid
+  JOIN goodsprice gprice ON goods.gdid=gprice.gdid
+ WHERE gprice.utid=1 AND gimage.gimgtype=1 AND gcollection.userid=#{userid};
+  	
+  </select>
+</mapper>
