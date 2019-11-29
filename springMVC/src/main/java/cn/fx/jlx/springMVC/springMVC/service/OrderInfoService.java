@@ -41,6 +41,23 @@ public class OrderInfoService {
 	
 	
 	
+	/**商家修改订单状态
+	 * 根据编号 更新订单信息状态 为  “已发货” 
+	 * @param orderInfoID 指定的订单编号
+	 */
+	@Transactional
+	public void modifystate(String orderInfoID){
+		Orderinfo order=orderinfoMapper.selectByPrimaryKey(orderInfoID);	
+		order.setOfstate(3);
+		orderinfoMapper.updateByPrimaryKeySelective(order);		
+		OrderlistExample example=new OrderlistExample();
+		example.createCriteria().andOfidEqualTo(orderInfoID);
+		List<Orderlist> ol_list= orderlistMapper.selectByExample(example);				
+							
+	}
+	
+
+	
 	/**
 	 * 获取商家登录的订单
 	 * @param stid
@@ -49,7 +66,7 @@ public class OrderInfoService {
 	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){	
 		OrderlistExample example=new OrderlistExample();
 		example.createCriteria().andGdidEqualTo(stuserid);
-		return orderlistMapper.selectByExample(example);
+		return orderlistMapperEx.getallstorderlist(stuserid);
 	}
 	
 
