@@ -49,7 +49,7 @@ public class OrderInfoService {
 	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){	
 		OrderlistExample example=new OrderlistExample();
 		example.createCriteria().andGdidEqualTo(stuserid);
-		return orderlistMapper.selectByExample(example);
+		return orderlistMapperEx.getallstorderlist(stuserid);
 	}
 	
 

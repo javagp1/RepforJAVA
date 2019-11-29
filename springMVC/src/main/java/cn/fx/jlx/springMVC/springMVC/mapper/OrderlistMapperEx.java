@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 public interface OrderlistMapperEx {
-	List<Map> getallstorderlist(Integer stid);
+	List<Orderlist> getallstorderlist(Integer stid);
  
 }

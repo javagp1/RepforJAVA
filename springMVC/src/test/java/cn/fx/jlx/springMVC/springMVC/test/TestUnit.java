@@ -54,8 +54,8 @@ public class TestUnit{
     	
 		
 		Integer stid=8;
-		List<Map> li=orderlistMapperEx.getallstorderlist(stid);
-    	for (Map map : li) {
+		List<Orderlist> li=orderlistMapperEx.getallstorderlist(stid);
+    	for (Orderlist map : li) {
 			System.out.println(map);
 		}
     }
