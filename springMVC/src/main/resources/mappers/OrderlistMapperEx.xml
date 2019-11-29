@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fx.jlx.springMVC.springMVC.mapper.OrderlistMapperEx">
+
+	<select id="getallstorderlist" resultType="cn.fx.jlx.springMVC.springMVC.pojo.Orderlist"
+		parameterType="java.util.List">
+
+		SELECT orderlist.* FROM orderlist JOIN goodsinfo goods ON goods.stid=#{stid}
+		AND goods.gdid=orderlist.gdid;
+
+	</select>
+</mapper>

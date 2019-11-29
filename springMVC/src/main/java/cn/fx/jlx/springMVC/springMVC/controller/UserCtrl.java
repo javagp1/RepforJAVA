@@ -105,10 +105,30 @@ public class UserCtrl {
 		return true;
 	}
 	
+	
+	
+	@RequestMapping("stlogout")
+	public Object stlogout(HttpSession session){
+		if(session.getAttribute("stuser")!=null){
+			
+			session.removeAttribute("stuser");
+		}
+		
+		
+		return true;
+	}
+	
 	@RequestMapping("useronline")
 	public Object isUserOnline(HttpSession session){
 		
 		return session.getAttribute("user");
 		
 	}
+	@RequestMapping("stuseronline")
+	public Object stisUserOnline(HttpSession session){
+		
+		return session.getAttribute("stuser");
+		
+	}
+
 }

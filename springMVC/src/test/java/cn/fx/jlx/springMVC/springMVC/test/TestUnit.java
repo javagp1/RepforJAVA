@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.fx.jlx.springMVC.springMVC.mapper.OrderinfoMapper;
 import cn.fx.jlx.springMVC.springMVC.mapper.OrderinfoMapperEx;
+import cn.fx.jlx.springMVC.springMVC.mapper.OrderlistMapperEx;
 import cn.fx.jlx.springMVC.springMVC.mapper.StuserMapper;
 import cn.fx.jlx.springMVC.springMVC.pojo.Orderlist;
 import cn.fx.jlx.springMVC.springMVC.pojo.Stuser;
@@ -37,14 +38,25 @@ public class TestUnit{
 	@Autowired
 	UserService userservice;
 	
+	@Autowired
+	OrderlistMapperEx orderlistMapperEx;
+	
     @Test
     public void test(){
     	
-    	Stuser stuser = new Stuser();
+    /*	Stuser stuser = new Stuser();
     	stuser.setSlogname("sensen");
     	stuser.setSpassword("sensen");
     	stuser.setStid(8);
     	userservice.stregister(stuser);
+    	*/
     	
+    	
+		
+		Integer stid=8;
+		List<Orderlist> li=orderlistMapperEx.getallstorderlist(stid);
+    	for (Orderlist map : li) {
+			System.out.println(map);
+		}
     }
 }
