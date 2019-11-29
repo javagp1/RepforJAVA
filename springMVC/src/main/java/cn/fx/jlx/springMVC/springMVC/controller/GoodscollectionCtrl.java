@@ -19,17 +19,17 @@ public class GoodscollectionCtrl {
 	public Object addCollection(GoodscollectionKey goodscollection,HttpSession session){
 		goodscollection.setUserid(((User)session.getAttribute("user")).getUserid());
 		
-		goodsCollectionService.addcollection(goodscollection);
+		return goodsCollectionService.addcollection(goodscollection);
 		
-		return true;
+		
 		
 	}
 	@RequestMapping("deletecollection")
 	public Object deleteCollection(GoodscollectionKey goodscollection,HttpSession session){
 		goodscollection.setUserid(((User)session.getAttribute("user")).getUserid());
-		goodsCollectionService.deleteCollection(goodscollection);
+		return goodsCollectionService.deleteCollection(goodscollection);
 		
-		return true;
+		
 	}
 	
 	@RequestMapping("getallcollection")
@@ -42,5 +42,10 @@ public class GoodscollectionCtrl {
 	public Object countCollection(Integer gdid){
 		
 		return goodsCollectionService.countCollection(gdid);
+	}
+	@RequestMapping("getusercollection")
+	public Object getUserCollection(HttpSession session){
+		Integer userid = ((User)session.getAttribute("user")).getUserid();
+		return goodsCollectionService.getUserCollection(userid);
 	}
 }
