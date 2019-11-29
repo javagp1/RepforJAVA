@@ -82,7 +82,7 @@ public class OrderInfoService {
 		}
 		Orderinfo orderinfo = orderinfoMapper.selectByPrimaryKey(ofid);
 		orderinfo.setOfstate(2);
-		
+		orderinfoMapper.updateByPrimaryKeySelective(orderinfo);
 		
 	}
 	
