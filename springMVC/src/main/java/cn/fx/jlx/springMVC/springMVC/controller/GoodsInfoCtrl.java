@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.fx.jlx.springMVC.springMVC.pojo.Goodsinfo;
+import cn.fx.jlx.springMVC.springMVC.service.GoodsCollectionService;
 import cn.fx.jlx.springMVC.springMVC.service.GoodsInfoService;
 
 @RestController
@@ -21,6 +22,9 @@ import cn.fx.jlx.springMVC.springMVC.service.GoodsInfoService;
 public class GoodsInfoCtrl {
 	@Autowired
 	private GoodsInfoService goodsInfoService;
+	
+	@Autowired
+	private GoodsCollectionService goodsCollectionService;
 
 	@RequestMapping("doupdate")
 	public String doUpdate(Goodsinfo goodsinfo,Integer pagenum,ModelMap map){
@@ -105,7 +109,9 @@ public class GoodsInfoCtrl {
 		Integer rowCount=20;
 		Integer pageCount = goodsInfoService.pageTotalCount(rowCount);
 		List<Map> list = goodsInfoService.getAllInfoes(pagenum, rowCount);
-		
+		for (Map map1 : list) {
+			map1.put("count",goodsCollectionService.countCollection((Integer)map1.get("gdid")));
+		}
 		Map result = new HashMap();
 		
 		result.put("pagecount", pageCount);
