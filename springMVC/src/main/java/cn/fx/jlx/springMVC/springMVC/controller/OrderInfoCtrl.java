@@ -41,7 +41,7 @@ public class OrderInfoCtrl {
 		orderInfoService.creatOrder(orderinfo, ctid);
 		
 		return true;
-		
+		 
 	}
 	
 	@RequestMapping("getorderinfoes")
