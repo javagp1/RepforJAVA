@@ -22,6 +22,8 @@ public class OrderInfoCtrl {
 	@Autowired
 	private OrderInfoService orderInfoService;
 	
+
+	
 	/**
 	 * 商家生成订单
 	 * @param session
@@ -30,7 +32,7 @@ public class OrderInfoCtrl {
 	@RequestMapping("getorderInfoesbystuser")
 	public List<Orderlist> getOrderInfoesBystuser(HttpSession session){
 		Stuser stuser=(Stuser) session.getAttribute("stuser");
-		return orderInfoService.getOrderInformationsByStuserID(stuser.getStuserid());
+		return orderInfoService.getOrderInformationsByStuserID(stuser.getStuserid(),2);
 		
 	}
 	
