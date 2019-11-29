@@ -39,8 +39,7 @@ public class OrderInfoService {
 	@Autowired
 	CartMapper cartMapper;
 	
-	
-	
+
 	/**商家修改订单状态
 	 * 根据编号 更新订单信息状态 为  “已发货” 
 	 * @param orderInfoID 指定的订单编号
@@ -48,13 +47,14 @@ public class OrderInfoService {
 	@Transactional
 	public void modifystate(String orderInfoID){
 		Orderinfo order=orderinfoMapper.selectByPrimaryKey(orderInfoID);	
-		order.setOfstate(3);
+		order.setOfstate(4);
 		orderinfoMapper.updateByPrimaryKeySelective(order);		
 		OrderlistExample example=new OrderlistExample();
 		example.createCriteria().andOfidEqualTo(orderInfoID);
-		List<Orderlist> ol_list= orderlistMapper.selectByExample(example);				
+	
 							
 	}
+	
 	
 
 	
@@ -65,7 +65,7 @@ public class OrderInfoService {
 	 */
 	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){	
 		OrderlistExample example=new OrderlistExample();
-		example.createCriteria().andGdidEqualTo(stuserid);
+		example.createCriteria().andGdidEqualTo(stuserid).andOlstatusEqualTo(2);
 		return orderlistMapperEx.getallstorderlist(stuserid);
 	}
 	
@@ -79,7 +79,7 @@ public class OrderInfoService {
 		List<Orderlist> list = orderlistMapper.selectByExample(example );
 		
 		for (Orderlist orderlist : list) {
-			orderlist.setOlstatus(2);
+			orderlist.setOlstatus(4);
 			orderlistMapper.updateByPrimaryKeySelective(orderlist);
 		}
 		Orderinfo orderinfo = orderinfoMapper.selectByPrimaryKey(ofid);
