@@ -24,13 +24,10 @@ public class OrderInfoCtrl {
 	
 
 	@RequestMapping("getsendgoods")
-	public Object getsendgoods(String olid){
-		return orderInfoService.modifystate(olid);
+	public Object getsendgoods(String orderListID){
+		return orderInfoService.modifystate(orderListID);
 		
 	}
-	
-
-
 	
 	/**
 	 * 商家生成订单

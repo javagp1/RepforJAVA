@@ -54,12 +54,8 @@ public class OrderInfoService {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * 获取商家登录的订单 
-=======
+
 	 * 获取商家登录的订单
-	 * @param i 
->>>>>>> branch 'master' of https://github.com/javagp1/RepforJAVA.git
 	 * @param stid
 	 * @return
 	 */
