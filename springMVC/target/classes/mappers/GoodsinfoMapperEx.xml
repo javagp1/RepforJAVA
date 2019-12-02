@@ -3,7 +3,8 @@
 <mapper namespace="cn.fx.jlx.springMVC.springMVC.mapper.GoodsinfoMapperEx">
   <select id="selectAllInfoes" resultType="map">
   	
-  SELECT gd.gdid,gd.gdname,img.gimgurl FROM goodsinfo gd JOIN goodsimage img ON gd.gdid=img.gdid WHERE img.gimgtype=1
+   SELECT gd.gdid,gd.gdname,img.gimgurl,COUNT(gc.gdid) ccount FROM goodsinfo gd JOIN goodsimage img ON gd.gdid=img.gdid LEFT JOIN goodscollection gc ON gc.gdid=gd.gdid  WHERE img.gimgtype=1 GROUP BY gd.gdid
+
 
   </select>
 </mapper>
