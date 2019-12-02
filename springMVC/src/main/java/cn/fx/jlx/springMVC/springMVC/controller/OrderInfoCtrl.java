@@ -36,9 +36,9 @@ public class OrderInfoCtrl {
 	 * @return
 	 */
 	@RequestMapping("getorderInfoesbystuser")
-	public List<Orderlist> getOrderInfoesBystuser(HttpSession session){
+	public Object getOrderInfoesBystuser(HttpSession session){
 		Stuser stuser=(Stuser) session.getAttribute("stuser");
-		return orderInfoService.getOrderInformationsByStuserID(stuser.getStuserid(),2);
+		return orderInfoService.getOrderInformationsByStuserID(stuser.getStuserid());
 		
 	}
 	

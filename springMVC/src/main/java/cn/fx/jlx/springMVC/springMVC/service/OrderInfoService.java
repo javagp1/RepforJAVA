@@ -44,13 +44,12 @@ public class OrderInfoService {
 	 * 根据编号 更新订单信息状态 为  “完成” 
 	 * @param orderInfoID 指定的订单编号
 	 */
-/*	@Transactional*/
+	@Transactional
 	public boolean modifystate(String olid){
 		Orderlist order=orderlistMapper.selectByPrimaryKey(olid);	
 		order.setOlstatus(6);
 		return orderlistMapper.updateByPrimaryKeySelective(order)==1;		
-
-							
+				
 	}
 
 	/**
@@ -59,13 +58,13 @@ public class OrderInfoService {
 	 * @param stid
 	 * @return
 	 */
-	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid, Integer olstatus){	
+	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid ){	
 		OrderlistExample example=new OrderlistExample();
 		example.createCriteria().andGdidEqualTo(stuserid).andOlstatusEqualTo(2);
 		return orderlistMapperEx.getallstorderlist(stuserid);
 	}
 	
-
+/*	, Integer olstatus*/
 	
 	@Transactional
 	public void payComplate(String ofid){
