@@ -42,4 +42,9 @@ public class GoodsCollectionService {
 		return goodscollectionMapper.countByExample(example);
 	}
 	
+	public List<GoodscollectionKey> getUserCollection(Integer userid){
+		GoodscollectionExample example = new GoodscollectionExample();
+		example.createCriteria().andUseridEqualTo(userid);
+		return goodscollectionMapper.selectByExample(example );
+	}
 }

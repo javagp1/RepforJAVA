@@ -39,8 +39,6 @@ public class UserService {
 		stuser.setSalt(salt);
 		stuser.setStatus(1);
 		
-
-		
 		return stuserMapper.insert(stuser) == 1;
 
 	}
