@@ -22,16 +22,14 @@ public class OrderInfoCtrl {
 	@Autowired
 	private OrderInfoService orderInfoService;
 	
+
 	@RequestMapping("getsendgoods")
 	public Object getsendgoods(String olid){
 		return orderInfoService.modifystate(olid);
 		
 	}
 	
-	
-	
-	
-	
+
 
 	
 	/**
@@ -42,7 +40,7 @@ public class OrderInfoCtrl {
 	@RequestMapping("getorderInfoesbystuser")
 	public List<Orderlist> getOrderInfoesBystuser(HttpSession session){
 		Stuser stuser=(Stuser) session.getAttribute("stuser");
-		return orderInfoService.getOrderInformationsByStuserID(stuser.getStuserid());
+		return orderInfoService.getOrderInformationsByStuserID(stuser.getStuserid(),2);
 		
 	}
 	

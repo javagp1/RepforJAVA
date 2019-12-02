@@ -54,11 +54,16 @@ public class OrderInfoService {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * 获取商家登录的订单 
+=======
+	 * 获取商家登录的订单
+	 * @param i 
+>>>>>>> branch 'master' of https://github.com/javagp1/RepforJAVA.git
 	 * @param stid
 	 * @return
 	 */
-	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){	
+	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid, Integer olstatus){	
 		OrderlistExample example=new OrderlistExample();
 		example.createCriteria().andGdidEqualTo(stuserid).andOlstatusEqualTo(2);
 		return orderlistMapperEx.getallstorderlist(stuserid);
