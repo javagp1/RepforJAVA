@@ -25,7 +25,8 @@ public class OrderInfoCtrl {
 
 	@RequestMapping("getsendgoods")
 	public Object getsendgoods(String olid){
-		return orderInfoService.modifystate(olid);
+		
+		 return orderInfoService.modifystate(olid);
 		
 	}
 	

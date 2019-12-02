@@ -43,15 +43,17 @@ public class OrderInfoService {
 	/**商家修改订单状态
 	 * 根据编号 更新订单信息状态 为  “完成” 
 	 * @param orderInfoID 指定的订单编号
+	 * @return 
 	 */
 	@Transactional
 	public boolean modifystate(String olid){
 		Orderlist order=orderlistMapper.selectByPrimaryKey(olid);	
 		order.setOlstatus(6);
-		return orderlistMapper.updateByPrimaryKeySelective(order)==1;		
-				
+		return orderlistMapper.updateByPrimaryKeySelective(order)==1;	
+					
 	}
-
+	
+	
 	/**
 
 	 * 获取商家登录的订单
