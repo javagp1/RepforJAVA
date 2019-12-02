@@ -58,13 +58,13 @@ public class OrderInfoService {
 	 * @param stid
 	 * @return
 	 */
-	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid ){	
+	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){	
 		OrderlistExample example=new OrderlistExample();
 		example.createCriteria().andGdidEqualTo(stuserid).andOlstatusEqualTo(2);
 		return orderlistMapperEx.getallstorderlist(stuserid);
 	}
 	
-/*	, Integer olstatus*/
+
 	
 	@Transactional
 	public void payComplate(String ofid){
