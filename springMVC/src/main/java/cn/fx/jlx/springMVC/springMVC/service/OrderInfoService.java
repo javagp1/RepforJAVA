@@ -44,7 +44,7 @@ public class OrderInfoService {
 	 * 根据编号 更新订单信息状态 为  “完成” 
 	 * @param orderInfoID 指定的订单编号
 	 */
-	@Transactional
+/*	@Transactional*/
 	public boolean modifystate(String orderListID){
 		Orderlist order=orderlistMapper.selectByPrimaryKey(orderListID);	
 		order.setOlstatus(6);
