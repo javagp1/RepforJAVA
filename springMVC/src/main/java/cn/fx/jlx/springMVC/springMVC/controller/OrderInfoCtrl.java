@@ -17,7 +17,7 @@ import cn.fx.jlx.springMVC.springMVC.service.OrderInfoService;
 
 @RestController
 @RequestMapping("/orderinfoctrl")
-public class OrderInfoCtrl {
+public class OrderInfoCtrl {   
 	
 	@Autowired
 	private OrderInfoService orderInfoService;
