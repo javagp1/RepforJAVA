@@ -45,8 +45,8 @@ public class OrderInfoService {
 	 * @param orderInfoID 指定的订单编号
 	 */
 /*	@Transactional*/
-	public boolean modifystate(String orderListID){
-		Orderlist order=orderlistMapper.selectByPrimaryKey(orderListID);	
+	public boolean modifystate(String olid){
+		Orderlist order=orderlistMapper.selectByPrimaryKey(olid);	
 		order.setOlstatus(6);
 		return orderlistMapper.updateByPrimaryKeySelective(order)==1;		
 
