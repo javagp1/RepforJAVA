@@ -45,22 +45,20 @@ public class OrderInfoService {
 	 * @param orderInfoID 指定的订单编号
 	 */
 	@Transactional
-	public void modifystate(String orderListID){
+	public boolean modifystate(String orderListID){
 		Orderlist order=orderlistMapper.selectByPrimaryKey(orderListID);	
 		order.setOlstatus(6);
-		orderlistMapper.updateByPrimaryKeySelective(order);		
-		OrderlistExample example=new OrderlistExample();
-		example.createCriteria().andOlidEqualTo(orderListID);
+		return orderlistMapper.updateByPrimaryKeySelective(order)==1;		
+
 							
 	}
 
 	/**
-	 * 获取商家登录的订单
-	 * @param i 
+	 * 获取商家登录的订单 
 	 * @param stid
 	 * @return
 	 */
-	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid, Integer olstatus){	
+	public List<Orderlist> getOrderInformationsByStuserID(Integer stuserid){	
 		OrderlistExample example=new OrderlistExample();
 		example.createCriteria().andGdidEqualTo(stuserid).andOlstatusEqualTo(2);
 		return orderlistMapperEx.getallstorderlist(stuserid);
