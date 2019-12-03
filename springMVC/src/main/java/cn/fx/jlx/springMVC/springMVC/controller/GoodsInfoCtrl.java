@@ -109,9 +109,7 @@ public class GoodsInfoCtrl {
 		Integer rowCount=20;
 		Integer pageCount = goodsInfoService.pageTotalCount(rowCount);
 		List<Map> list = goodsInfoService.getAllInfoes(pagenum, rowCount);
-		for (Map map1 : list) {
-			map1.put("count",goodsCollectionService.countCollection((Integer)map1.get("gdid")));
-		}
+		
 		Map result = new HashMap();
 		
 		result.put("pagecount", pageCount);
