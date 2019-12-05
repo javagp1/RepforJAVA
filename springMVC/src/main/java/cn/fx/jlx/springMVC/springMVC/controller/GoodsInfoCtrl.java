@@ -2,19 +2,29 @@ package cn.fx.jlx.springMVC.springMVC.controller;
 
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.fx.jlx.springMVC.springMVC.mapper.GoodsinfoMapper;
+import cn.fx.jlx.springMVC.springMVC.pojo.Goodsimage;
 import cn.fx.jlx.springMVC.springMVC.pojo.Goodsinfo;
+import cn.fx.jlx.springMVC.springMVC.pojo.Goodsprice;
+import cn.fx.jlx.springMVC.springMVC.pojo.Stuser;
 import cn.fx.jlx.springMVC.springMVC.service.GoodsCollectionService;
 import cn.fx.jlx.springMVC.springMVC.service.GoodsInfoService;
+import cn.fx.jlx.springMVC.springMVC.service.GoodsimageServise;
+import cn.fx.jlx.springMVC.springMVC.service.GoodspriceService;
 
 @RestController
 @RequestMapping("/goodsinfoctrl")
@@ -25,6 +35,15 @@ public class GoodsInfoCtrl {
 	
 	@Autowired
 	private GoodsCollectionService goodsCollectionService;
+	
+	@Autowired
+	private GoodsinfoMapper goodsInfoMapper;
+	
+	@Autowired
+	private GoodsimageServise goodsImageServise;
+	
+	@Autowired
+	private GoodspriceService goodspriceService;
 
 	@RequestMapping("doupdate")
 	public String doUpdate(Goodsinfo goodsinfo,Integer pagenum,ModelMap map){
@@ -56,6 +75,31 @@ public class GoodsInfoCtrl {
 		return this.getAll(pagenum, map);
 		
 	}
+	@RequestMapping("addgoodsinfo")
+	public Object addGoodsInfo(Goodsinfo goodsinfo,Goodsimage goodsimage,@RequestParam(value="price") List<Double> price,HttpSession session){
+		
+		Stuser stuser =  (Stuser)session.getAttribute("stuser");
+		goodsinfo.setStid(stuser.getStid());
+		goodsinfo.setGtdate(new Date());
+		goodsInfoService.doInsert(goodsinfo);
+		
+		goodsimage.setGdid(goodsinfo.getGdid());
+		goodsimage.setGimgtype(1);
+		
+		goodsImageServise.addGdimg(goodsimage);
+		
+		
+		for(int i=0;i<=price.size();i++){
+			Goodsprice goodsprice = new Goodsprice();
+			goodsprice.setGdid(goodsinfo.getGdid());
+			goodsprice.setUtid(i+1);
+			goodsprice.setPrice(price.get(i));
+			goodspriceService.addGoodsPrice(goodsprice);
+		}
+		
+		return true;
+	}
+	
 	
 	@RequestMapping("editinsert")
 	public String editInsert(ModelMap map){
